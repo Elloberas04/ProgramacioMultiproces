@@ -14,20 +14,31 @@ public class ExercicisMultiproces1 {
 
         String sortida = "-1";
 
-        while (!sortida.equals("exit")) {
+        while (true) {
             // L'usuari introdueix un valor
             System.out.print("Introduir un nombre enter: ");
             sortida = scan.nextLine();
 
-            String[] command = {
-                    "java",
-                    "-jar",
-                    "./out/artifacts/ExercisisMultiproces1_jar/ExercisisMultiproces1.jar",
-                    ""
-            };
+            if (sortida.equals("exit")) {
+                break;
+            }
 
-            System.out.println(getSon(command, sortida)); //L'hi envi la sortida per poder fer la consulta
+            try {
+                int num = Integer.parseInt(sortida);
 
+                String[] command = {
+                        "java",
+                        "-jar",
+                        "./out/artifacts/ExercisisMultiproces1_jar/ExercisisMultiproces1.jar",
+                        ""
+                };
+
+                System.out.println(getSon(command, sortida)); //L'hi envi la sortida per poder fer la consulta
+
+            } catch (NumberFormatException e) {
+                System.out.println("ERROR: S'ha de introduir un nombre");
+                System.out.println();
+            }
         };
         scan.close();
     }
