@@ -14,7 +14,7 @@ public class ExercicisMultiproces2 {
 
 
         // L'usuari introdueix un STRING.
-        System.out.print("Introduir un STRING: ");
+        System.out.print("Introdueix un STRING: ");
         String frase = scan.nextLine();
 
         // Configuram la comanda per iniciar un nou proces Java. Indicam el JAR.
