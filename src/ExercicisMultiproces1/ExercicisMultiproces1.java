@@ -76,6 +76,8 @@ public class ExercicisMultiproces1 {
                 }
                 // Tancam BufferedReader.
                 in.close();
+                // Finalitzam procés fill.
+                proces.destroy();
             } catch (IOException ex) { // Control d'errors.
                 System.out.println("Error al mostrar el procés fill");
             }

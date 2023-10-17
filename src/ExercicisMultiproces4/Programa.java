@@ -35,6 +35,9 @@ public class Programa {
                 System.exit(-1);
             }
 
+            // Finalitzam el procés dirProcess.
+            dirProcess.destroy();
+
             // Cream un objecte ProcessBuilder per executar l'arxiu "ExecutarFind.java" amb l'arxiu com a parametre.
             ProcessBuilder PBfind = new ProcessBuilder("java", "src/ExercicisMultiproces4/ExecutarFind.java", nomArxiu);
 
@@ -46,6 +49,9 @@ public class Programa {
 
             // Esperam a que finalitzi.
             int findExitCode = findProcess.waitFor();
+
+            // Finalitzam el procés findProcess.
+            findProcess.destroy();
 
             // IF de control.
             if (findExitCode != 0) {

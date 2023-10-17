@@ -13,22 +13,32 @@ public class ExercicisMultiproces2 {
         Scanner scan = new Scanner(System.in);
 
 
-        // L'usuari introdueix un STRING.
-        System.out.print("Introdueix un STRING: ");
-        String frase = scan.nextLine();
+        String frase = "-1";
 
-        // Configuram la comanda per iniciar un nou proces Java. Indicam el JAR.
-        String[] command = {
-                "java",
-                "-jar",
-                "./out/artifacts/ExercisisMultiproces2_jar/ExercisisMultiproces2.jar",
-                ""
+        // Bucle per demanar dades fins que s'introduesqui 'exit'.
+        while (true) {
+
+            System.out.print("Introdueix una frase i/o paraula (o 'exit' per finalitzar): ");
+            frase = scan.nextLine();
+
+            // Si s'escriu 'exit' finalitza el bucle i el programa.
+            if (frase.equals("exit")) {
+                break;
+            }
+
+            // Configuram la comanda per iniciar un nou proces Java. Indicam el JAR.
+            String[] command = {
+                    "java",
+                    "-jar",
+                    "./out/artifacts/ExercisisMultiproces2_jar/ExercisisMultiproces2.jar",
+                    ""
+            };
+
+            // Crida la funció getSon per executar el procés fill amb la comanda i la frase per poder fer el canvi.
+            getSon(command, frase);
+
         };
-
-        // Crida la funció getSon per executar el procés fill amb la comanda i la frase per poder fer el canvi.
-        getSon(command, frase);
-
-        // Tencam scanner.
+        // Tancam Scanner.
         scan.close();
     }
 
@@ -60,8 +70,12 @@ public class ExercicisMultiproces2 {
                 {
                     System.out.println(linea);
                 }
+                System.out.println();
                 // Tancam BufferedReader.
                 in.close();
+
+                // Finalitzam procés fill.
+                proces.destroy();
             }catch(IOException ex){ // Control d'errors.
                 System.out.println("Error al mostrar el proces fill");
             }

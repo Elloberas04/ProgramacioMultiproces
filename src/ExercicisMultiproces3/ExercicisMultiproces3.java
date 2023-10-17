@@ -75,6 +75,9 @@ public class ExercicisMultiproces3 {
                 // Tancam BufferedReader.
                 in.close();
 
+                // Finalitzam procés fill.
+                proces.destroy();
+
                 // Mostram el missatge del fill.
                 System.out.println("Pare: rep missatge del fill \"" + linea2.substring(linea2.indexOf("pare: ") + 6) + "\"");
                 System.out.println();
