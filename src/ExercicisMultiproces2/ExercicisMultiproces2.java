@@ -13,10 +13,11 @@ public class ExercicisMultiproces2 {
         Scanner scan = new Scanner(System.in);
 
 
-        // L'usuari introdueix un valor
+        // L'usuari introdueix un STRING.
         System.out.print("Introduir un STRING: ");
-        String sortida = scan.nextLine();
+        String frase = scan.nextLine();
 
+        // Configuram la comanda per iniciar un nou proces Java. Indicam el JAR.
         String[] command = {
                 "java",
                 "-jar",
@@ -24,39 +25,48 @@ public class ExercicisMultiproces2 {
                 ""
         };
 
-        System.out.println(getSon(command, sortida)); //L'hi envi la sortida per poder fer la consulta
+        // Crida la funció getSon per executar el procés fill amb la comanda i la frase per poder fer el canvi.
+        getSon(command, frase);
 
+        // Tencam scanner.
         scan.close();
     }
 
-    private static String getSon(String[] command, String value) {
-        String read = "";
+    // Funció getSon().
+    private static void getSon(String[] command, String value) {
 
         try {
             Runtime r = Runtime.getRuntime();
 
+            // Iniciam un nou procés mitjançant la comanda especificada.
             Process proces = r.exec(command);
 
+            // Configuram els canals de comunicació amb el procés fill.
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(proces.getOutputStream()));
             BufferedReader in = new BufferedReader(new InputStreamReader(proces.getInputStream()));
 
             System.out.print("El pare diu: ");
+
+            // Enviam el valor a través de la sortida del procés.
             out.write(value);
+
+            // Tancam BufferedWriter.
             out.close();
+
             String linea = null;
-            try{
+            try {
+                // Llegeix les respostes del procés fill i les mostra a la sortida estàndard.
                 while((linea = in.readLine()) != null)
                 {
                     System.out.println(linea);
                 }
+                // Tancam BufferedReader.
                 in.close();
-            }catch(IOException ex){
+            }catch(IOException ex){ // Control d'errors.
                 System.out.println("Error al mostrar el proces fill");
             }
-        } catch (IOException ex) {
+        } catch (IOException ex) { // Control d'errors.
             System.err.println("Hay un problema por parte del padre a la hora de la comunicacion");
         }
-
-        return read;
     }
 }
